@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ru.com.bulat.newsapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,19 +22,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(R.layout.fragment_spalash)
 
-        Handler(Looper.myLooper()!!).postDelayed(
-            {
-                setContentView(mBinding.root)
-                val nav_host_fragment = findViewById<FragmentContainerView>(R.id.nav_host_fragment)
-                mBinding.bottomNavMenu.setupWithNavController(
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(3000)
+            _binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(mBinding.root)
+            val nav_host_fragment = findViewById<FragmentContainerView>(R.id.nav_host_fragment)
+            mBinding.bottomNavMenu.setupWithNavController(
                     navController = nav_host_fragment.findNavController()
                 )
-            },
-            2000
-        )
+        }
     }
 }
