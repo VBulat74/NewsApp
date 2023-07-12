@@ -10,10 +10,10 @@ import ru.com.bulat.newsapp.models.Article
 interface ArticleDao {
 
     @Query("SELECT * FROM articles")
-    suspend fun getAllArticles () : LiveData<List<Article>>
+    suspend fun getAllArticles(): LiveData<List<Article>>
 
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert (article: Article)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(article: Article)
 
     @Delete
     suspend fun delete(article: Article)

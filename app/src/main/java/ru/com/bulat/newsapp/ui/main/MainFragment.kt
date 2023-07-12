@@ -5,20 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.com.bulat.newsapp.R
-import ru.com.bulat.newsapp.databinding.FragmentFavoriteBinding
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import ru.com.bulat.newsapp.databinding.FragmentMainBinding
 
-// TODO: Rename parameter arguments, choose names that match
+@AndroidEntryPoint
 class MainFragment : Fragment() {
-    private lateinit var mBinding: FragmentMainBinding
+    private var _binding: FragmentMainBinding? = null
+    private val mBinding get() = _binding!!
+
+    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        mBinding = FragmentMainBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.all
     }
 }

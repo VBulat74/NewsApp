@@ -15,16 +15,17 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    @Provides
-    fun baseURL() = BASE_URL
 
     @Provides
-    fun login() = HttpLoggingInterceptor()
+    fun baseUrl() = BASE_URL
+
+    @Provides
+    fun logging() = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     @Provides
     fun okHttpClient() = OkHttpClient.Builder()
-        .addInterceptor(login())
+        .addInterceptor(logging())
         .build()
 
     @Provides

@@ -4,24 +4,23 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-abstract class ArticleDataBase : RoomDatabase() {
+abstract class ArticleDatabase: RoomDatabase() {
 
-    abstract fun  getArticleDao() :ArticleDao
+    abstract fun getArticleDao(): ArticleDao
 
     companion object {
         @Volatile
-        private var instance : ArticleDataBase? = null
-
+        private var instance: ArticleDatabase? = null
         private val LOCK = Any()
-        operator fun invoke(context: Context) = instance?: synchronized(LOCK) {
-            instance ?: createDatabase (context).also { instance = it }
 
+        operator fun invoke(context: Context) = instance?: synchronized(LOCK) {
+            instance ?: createDatabase(context).also { instance = it }
         }
 
-        private fun createDatabase(context: Context): ArticleDataBase {
+        private fun createDatabase(context: Context) : ArticleDatabase {
             return Room.databaseBuilder(
                 context.applicationContext,
-                ArticleDataBase::class.java,
+                ArticleDatabase::class.java,
                 "article_database"
             ).build()
         }
