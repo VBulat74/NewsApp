@@ -6,4 +6,5 @@
     
     <color name="teal">#0dcdaa</color>
     <color name="grey_light">#FFF2F2F2</color>
+    <color name="grey_black">#FF262626</color>
 </resources>
