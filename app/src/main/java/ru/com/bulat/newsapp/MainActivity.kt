@@ -2,7 +2,6 @@ package ru.com.bulat.newsapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             delay(3000)
             _binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(mBinding.root)
-            val nav_host_fragment = findViewById<FragmentContainerView>(R.id.nav_host_fragment)
+            val nav_host_fragment = mBinding.navHostFragment
             mBinding.bottomNavMenu.setupWithNavController(
                     navController = nav_host_fragment.findNavController()
                 )
