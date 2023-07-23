@@ -12,6 +12,7 @@
         android:layout_width="88dp"
         android:layout_height="84dp"
         android:scaleType="centerCrop"
+        android:background="@drawable/bg_mage_10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -42,7 +43,7 @@
             android:textColor="@color/grey_black"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:textFontWeight="700"
+            app:fontWeight="700"
             tools:text="sadasdfasdf adsfsadfsadf sadfasdf sadf sadfasdfasdf dsad asdasd asd"/>
     </LinearLayout>
 
