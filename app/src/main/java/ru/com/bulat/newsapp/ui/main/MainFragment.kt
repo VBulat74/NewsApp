@@ -5,10 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import ru.com.bulat.newsapp.R
 import ru.com.bulat.newsapp.databinding.FragmentMainBinding
 import ru.com.bulat.newsapp.ui.adapters.NewsAdapter
 import ru.com.bulat.newsapp.utils.Resource
@@ -24,7 +27,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
@@ -33,6 +36,15 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
+
+        newsAdapter.setOnItemClickListener {
+            val bundle = bundleOf( "article" to it )
+            view.findNavController().navigate(
+                R.id.action_mainFragment_to_detailsFragment,
+                bundle
+            )
+        }
+
         viewModel.newsLiveData.observe(viewLifecycleOwner) {response ->
             when (response) {
                 is Resource.Success -> {
